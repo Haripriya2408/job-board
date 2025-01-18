@@ -6,10 +6,9 @@ frontend:
         - npm ci
     build:
       commands:
-        - npm run build
-        - npm run export  # Add this line if you have an export script
+        - npm run build  # Remove the export command since output: 'export' handles it
   artifacts:
-    baseDirectory: out   # This is correct for exported static files
+    baseDirectory: out
     files:
       - '**/*'
   cache:
