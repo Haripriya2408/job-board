@@ -3,7 +3,7 @@
 
 import { MapPin, DollarSign, Clock, Building, Briefcase, Users, Mail } from 'lucide-react';
 import Link from 'next/link';
-
+import Image from 'next/image';
 interface Job {
   title: string;
   company: string;
@@ -46,7 +46,6 @@ export default function JobDetailsClient({ job, jobId }: { job: Job | undefined,
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center space-x-4 mb-4">
               <div className="bg-white p-3 rounded-lg">
-                <img src="/api/placeholder/64/64" alt="Company Logo" className="rounded" />
               </div>
               <div>
                 <h1 className="text-3xl font-bold mb-2">{job.title}</h1>

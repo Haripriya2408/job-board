@@ -1,23 +1,23 @@
-// lib/db.ts
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-import { setupJobApplicationsTable } from './setupDb';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 
-if (!process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID || !process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY) {
-  throw new Error('AWS credentials not found in environment variables');
+let docClient: DynamoDBDocumentClient | null = null;
+
+// Initialize the DynamoDB client only if we're in a production environment
+// or if we have the necessary AWS credentials
+try {
+  if (process.env.NODE_ENV === 'production' || process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID) {
+    const client = new DynamoDBClient({
+      credentials: {
+        accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID || '',
+        secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY || ''
+      }
+    });
+
+    docClient = DynamoDBDocumentClient.from(client);
+  }
+} catch (error) {
+  console.warn('Failed to initialize DynamoDB client:', error);
 }
 
-const client = new DynamoDBClient({
-  region: "us-east-1", // or your preferred region
-  credentials: {
-    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY,
-  },
-});
-
-export const docClient = DynamoDBDocumentClient.from(client);
-
-// Initialize the database table
-setupJobApplicationsTable()
-  .then(() => console.log('Database setup completed'))
- 
+export { docClient };

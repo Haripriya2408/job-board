@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { saveApplication } from '@/lib/applicationService';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Mail, Phone, User, Briefcase, X, FileText } from 'lucide-react';
+import { Mail, Phone, User, Briefcase,  FileText } from 'lucide-react';
 
 interface Job {
   title?: string;
@@ -38,12 +38,21 @@ export default function ApplyPageClient({ jobId, job }: ApplyPageProps) {
     setIsSubmitting(true);
     
     try {
-      const resumeData = resume ? await new Promise((resolve) => {
+      const resumeData = resume ? await new Promise<string>((resolve, reject) => {
         const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result);
+        reader.onloadend = () => {
+          // Ensure we're getting a string result
+          const result = reader.result;
+          if (typeof result === 'string') {
+            resolve(result);
+          } else {
+            reject(new Error('Failed to read file as string'));
+          }
+        };
+        reader.onerror = () => reject(new Error('Failed to read file'));
         reader.readAsDataURL(resume);
       }) : null;
-
+  
       await saveApplication({
         jobId,
         ...formData,
@@ -53,6 +62,7 @@ export default function ApplyPageClient({ jobId, job }: ApplyPageProps) {
       setIsSubmitted(true);
     } catch (error) {
       setError('Failed to submit application. Please try again.');
+      console.error('Application submission error:', error);
     } finally {
       setIsSubmitting(false);
     }
