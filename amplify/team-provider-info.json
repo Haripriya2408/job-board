@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-jobboard-dev-e280b-authRole",
+      "UnauthRoleArn": "arn:aws:iam::464097593788:role/amplify-jobboard-dev-e280b-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::464097593788:role/amplify-jobboard-dev-e280b-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-jobboard-dev-e280b-deployment",
+      "UnauthRoleName": "amplify-jobboard-dev-e280b-unauthRole",
+      "StackName": "amplify-jobboard-dev-e280b",
+      "StackId": "arn:aws:cloudformation:us-west-1:464097593788:stack/amplify-jobboard-dev-e280b/bcdab470-d559-11ef-938a-028cfa5cd82d",
+      "AmplifyAppId": "d1v0gicnq1jgxg"
+    }
+  }
+}
