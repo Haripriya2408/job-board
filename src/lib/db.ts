@@ -8,6 +8,7 @@ let docClient: DynamoDBDocumentClient | null = null;
 try {
   if (process.env.NODE_ENV === 'production' || process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID) {
     const client = new DynamoDBClient({
+      region: process.env.AWS_REGION || 'us-east-1',
       credentials: {
         accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID || '',
         secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY || ''
