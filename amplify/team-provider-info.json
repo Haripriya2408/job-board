@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-boardingjob-dev-9b547-authRole",
+      "UnauthRoleArn": "arn:aws:iam::464097593788:role/amplify-boardingjob-dev-9b547-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::464097593788:role/amplify-boardingjob-dev-9b547-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-boardingjob-dev-9b547-deployment",
+      "UnauthRoleName": "amplify-boardingjob-dev-9b547-unauthRole",
+      "StackName": "amplify-boardingjob-dev-9b547",
+      "StackId": "arn:aws:cloudformation:us-east-1:464097593788:stack/amplify-boardingjob-dev-9b547/baea3040-d573-11ef-a170-0affdbe12e6b",
+      "AmplifyAppId": "dha9hq8q14gve"
+    }
+  }
+}
