@@ -111,7 +111,7 @@ export default function HomePage() {
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="bg-gray-50 p-2 rounded-lg">
-                      <img src="/api/placeholder/48/48" alt="Company Logo" className="rounded-lg" />
+                      
                     </div>
                     <span className="bg-purple-50 text-purple-600 px-4 py-1 rounded-full text-sm font-medium border border-purple-100">
                       {job.type}
