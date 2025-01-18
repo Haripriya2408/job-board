@@ -3,7 +3,6 @@
 
 import { MapPin, DollarSign, Clock, Building, Briefcase, Users, Mail } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
 interface Job {
   title: string;
   company: string;
@@ -26,7 +25,7 @@ export default function JobDetailsClient({ job, jobId }: { job: Job | undefined,
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="bg-white p-8 rounded-xl shadow-sm max-w-md w-full text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Job Not Found</h1>
-          <p className="text-gray-600 mb-6">The job posting you're looking for doesn't exist or has been removed.</p>
+          <p className="text-gray-600 mb-6">The job posting you are looking for does not exist or has been removed.</p>
           <Link 
             href="/"
             className="inline-block bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-medium"
