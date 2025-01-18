@@ -1,6 +1,6 @@
 'use client';
 
-import { Search, MapPin, Briefcase, DollarSign, Clock, X } from 'lucide-react';
+import { Search, MapPin, Briefcase, DollarSign, Clock} from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -17,7 +17,7 @@ interface Job {
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [jobType, setJobType] = useState('');
-  const [jobs, setJobs] = useState([
+  const [jobs, setJobs] = useState<Job[]>([
     {
       id: 1,
       title: "Senior Frontend Developer",
@@ -35,9 +35,23 @@ export default function HomePage() {
       type: "Part-time",
       salary: "$80k - $100k",
       posted: "1 week ago"
-    },
-    // Add more jobs as needed
+    }
   ]);
+
+  const handleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    // Add your search logic here
+    const filtered = jobs.filter(job => {
+      const matchesSearch = 
+        job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        job.location.toLowerCase().includes(searchQuery.toLowerCase());
+      
+      const matchesType = !jobType || job.type.toLowerCase() === jobType.toLowerCase();
+      
+      return matchesSearch && matchesType;
+    });
+  };
 
   const filteredJobs = jobs.filter(job => {
     const matchesSearch = 
@@ -62,7 +76,7 @@ export default function HomePage() {
             <p className="text-xl mb-8 text-white/90">
               Discover thousands of job opportunities with all the information you need
             </p>
-            <div className="bg-white/95 backdrop-blur rounded-xl p-6 shadow-xl">
+            <form className="bg-white/95 backdrop-blur rounded-xl p-6 shadow-xl">
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1 relative">
                   <Search className="absolute left-3 top-3 text-gray-400" />
@@ -86,15 +100,20 @@ export default function HomePage() {
                     <option value="contract">Contract</option>
                   </select>
                 </div>
-                <button className="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition-all duration-200 font-medium shadow-md hover:shadow-lg">
+                <button 
+                  type="button"
+                  onClick={handleSearch}
+                  className="bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition-all duration-200 font-medium shadow-md hover:shadow-lg"
+                >
                   Search
                 </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
 
+      {/* Rest of your component remains the same */}
       {/* Featured Jobs Section */}
       <div className="bg-gray-50/50 py-16">
         <div className="container mx-auto px-4">
@@ -111,7 +130,6 @@ export default function HomePage() {
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="bg-gray-50 p-2 rounded-lg">
-                      
                     </div>
                     <span className="bg-purple-50 text-purple-600 px-4 py-1 rounded-full text-sm font-medium border border-purple-100">
                       {job.type}
@@ -145,7 +163,6 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-
 
           {/* Job Categories */}
           <div className="mt-20">
