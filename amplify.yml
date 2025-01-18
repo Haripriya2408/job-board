@@ -7,11 +7,11 @@ frontend:
     build:
       commands:
         - npm run build
+        - npm run export  # Add this line if you have an export script
   artifacts:
-    baseDirectory: out
+    baseDirectory: out   # This is correct for exported static files
     files:
       - '**/*'
   cache:
     paths:
       - node_modules/**/*
-      - .next/cache/**/*
